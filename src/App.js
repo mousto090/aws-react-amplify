@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+// import './App.css';
+import { DataStore } from '@aws-amplify/datastore';
+import { useCallback, useEffect } from 'react';
+import { Course } from './models';
 
-function App() {
+
+
+const App = () => {
+
+  const addCourse = useCallback(async () => {
+    const course = new Course({
+      title: "Course 1",
+      description: "Course 1 description",
+      // "videos": []
+    });
+    return await DataStore.save(course);
+  }, [])
+
+
+  useEffect(() => {
+    const getCourses = async () => {
+      const courses = await DataStore.query(Course);
+      console.log(courses);
+    }
+    getCourses()
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={addCourse}>Add course</button>
+
     </div>
   );
 }
