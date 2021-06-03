@@ -20,5 +20,19 @@
         }
       }
     }
+  },
+  "auth": {
+    "videocourse": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  },
+  "storage": {
+    "videocoursesapp": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }
